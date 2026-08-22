@@ -3,17 +3,18 @@ set -euo pipefail
 
 ROOT="${1:-.}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
-OVERLAY="$HERE/overlay"
+BUNDLE="$HERE/overlay.tar.xz"
 
 if [ ! -f "$ROOT/package.json" ] || [ ! -d "$ROOT/src" ]; then
   echo "Target does not look like a codex-chatgpt-web checkout: $ROOT" >&2
   exit 1
 fi
 
-if [ ! -d "$OVERLAY" ]; then
-  echo "Missing overlay directory: $OVERLAY" >&2
+if [ ! -f "$BUNDLE" ]; then
+  echo "Missing compatibility bundle: $BUNDLE" >&2
   exit 1
 fi
 
-cp -R "$OVERLAY"/. "$ROOT"/
+tar -xJf "$BUNDLE" -C "$ROOT" --strip-components=1
+
 echo "OpenCodex compatibility overlay applied to: $ROOT"
