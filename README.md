@@ -38,9 +38,7 @@ No OpenCodex core source change is required.
 
 ## Why an overlay instead of a full fork?
 
-The hard browser automation, login handling, model selection, Responses/SSE bridge and launcher all remain upstream work. This repository contains only the compatibility delta, so the maintenance surface is obvious and small. It also avoids duplicating upstream demo assets and dependencies.
-
-The exact 22-file compatibility delta is stored in `overlay.tar.gz.b64`; see `OVERLAY_MANIFEST.md` for its file list and checksums.
+The hard browser automation, login handling, model selection, Responses/SSE bridge and launcher remain upstream work. This repository contains only the 22 compatibility files under `overlay/`, so the maintenance surface stays visible and small.
 
 ## Apply
 
@@ -52,7 +50,7 @@ cd codex-chatgpt-web
 git checkout e2c69d54877c47aa6a34bce72e7536e1c31c9846
 ```
 
-2. From this repository, apply the overlay to that checkout:
+2. From this repository, apply the compatibility files:
 
 ```bash
 bash apply-overlay.sh /path/to/codex-chatgpt-web
